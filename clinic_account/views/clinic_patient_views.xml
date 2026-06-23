@@ -1,0 +1,12 @@
+<odoo>
+    <record id="clinic_patient_view_form_inherit" model="ir.ui.view">
+        <field name="name">clinic.patient.form.inherit</field>
+        <field name="model">clinic.patient</field>
+        <field name="inherit_id" ref="clinic.clinic_patient_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="partner_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+    <!-- A real Inventory product, linked to the Paracetamol medicine -->
+    <record id="product_paracetamol" model="product.product">
+        <field name="name">Paracetamol 500mg</field>
+        <field name="type">consu</field>
+        <field name="is_storable">True</field>
+        <field name="list_price">2.50</field>
+    </record>
+
+    <!-- Initial on-hand quantity in WH/Stock -->
+    <record id="quant_paracetamol" model="stock.quant">
+        <field name="product_id" ref="product_paracetamol"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="quantity">100</field>
+    </record>
+
+    <!-- Link the existing clinic medicine to the inventory product -->
+    <record id="clinic.med_paracetamol" model="clinic.medicine">
+        <field name="product_id" ref="product_paracetamol"/>
+    </record>
+</odoo>

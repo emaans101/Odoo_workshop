@@ -1,0 +1,19 @@
+<odoo>
+    <record id="clinic_consultation_view_form_inherit" model="ir.ui.view">
+        <field name="name">clinic.consultation.form.inherit</field>
+        <field name="model">clinic.consultation</field>
+        <field name="inherit_id" ref="clinic.clinic_consultation_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button name="view_invoice" type="object" class="oe_stat_button"
+                            string="Invoice" icon="fa-dollar" invisible="invoice_id == False"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="consultation_fee"/>
+                <field name="invoice_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,24 @@
+<odoo>
+    <menuitem id="clinic_menu_root" name="Clinic"/>
+
+    <menuitem id="clinic_menu_appointments" name="Appointments"
+              parent="clinic_menu_root" action="clinic_appointment_action" sequence="10"/>
+
+    <menuitem id="clinic_menu_patients" name="Patients"
+              parent="clinic_menu_root" action="clinic_patient_action" sequence="20"/>
+
+    <menuitem id="clinic_menu_consultations" name="Consultations"
+              parent="clinic_menu_root" action="clinic_consultation_action" sequence="30"/>
+
+    <menuitem id="clinic_menu_config" name="Configuration"
+              parent="clinic_menu_root" sequence="90"/>
+
+    <menuitem id="clinic_menu_doctors" name="Doctors"
+              parent="clinic_menu_config" action="clinic_doctor_action" sequence="10"/>
+
+    <menuitem id="clinic_menu_specializations" name="Specializations"
+              parent="clinic_menu_config" action="clinic_specialization_action" sequence="20"/>
+
+    <menuitem id="clinic_menu_medicines" name="Medicines"
+              parent="clinic_menu_config" action="clinic_medicine_action" sequence="30"/>
+</odoo>

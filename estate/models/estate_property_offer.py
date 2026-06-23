@@ -3,28 +3,32 @@ from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
-    _description = "Estate property offers"
+    _description = "Offers on estate properties"
 
-    price = fields.Float(required=True)
+    price = fields.Float()
     partner_id = fields.Many2one("res.partner", required=True)
     property_id = fields.Many2one("estate.property", required=True)
-    status = fields.Selection(selection=[('accepted', 'Accepted'), ('refused', 'Refused')])
+    state = fields.Selection(selection=[("accepted", "Accepted"), ("refused", "Refused")])
+    property_type_id = fields.Many2one("estate.property.type", related="property_id.property_type_id", store=True)
+    
+
+    _check_offer_price = models.Constraint("CHECK(price > 0)", "The offer price must be strictly positive")
 
     def accept_offer(self):
         for record in self:
-            if record.property_id.state == "offer_accepted":
-                raise UserError("This property already has an offer accepted!")
+            if record.state == "refused":
+                raise UserError("You cannot accept a refused offer")
+            elif record.property_id.state == "offer_accepted":
+                raise UserError("this property already has an accepted offer")
             else:
-                record.status = "accepted"
+                record.state = "accepted"
+                record.property_id.buyer_id = record.partner_id
                 record.property_id.state = "offer_accepted"
-                record.property_id.buyer_id = record.partner_id.id
                 record.property_id.selling_price = record.price
 
     def refuse_offer(self):
         for record in self:
-            if record.status == 'accepted':
-                raise UserError('Accepted offers cannot be refused')
+            if record.state == "accepted":
+                raise UserError("You cannot refuse an accepted offer")
             else:
-                record.status = "refused"
-
-    
+                record.state = "refused"

@@ -1,0 +1,100 @@
+<odoo>
+
+    <!-- ACTION -->
+    <record id="clinic_medicine_action" model="ir.actions.act_window">
+        <field name="name">Medicines</field>
+        <field name="res_model">clinic.medicine</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <!-- LIST VIEW (simple clean table) -->
+    <record id="clinic_medicine_view_list" model="ir.ui.view">
+        <field name="name">clinic.medicine.list</field>
+        <field name="model">clinic.medicine</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="reference"/>
+                <field name="price"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW (basic) -->
+    <record id="clinic_medicine_view_form" model="ir.ui.view">
+        <field name="name">clinic.medicine.form</field>
+        <field name="model">clinic.medicine</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="reference"/>
+                    </group>
+
+                    <group>
+                        <field name="price"/>
+                        <field name="qty_available"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 🎨 FUN KANBAN VIEW -->
+    <record id="clinic_medicine_view_kanban" model="ir.ui.view">
+        <field name="name">clinic.medicine.kanban.fun</field>
+        <field name="model">clinic.medicine</field>
+        <field name="arch" type="xml">
+
+            <kanban>
+
+                <field name="name"/>
+                <field name="reference"/>
+                <field name="price"/>
+
+                <templates>
+                    <t t-name="card">
+
+                        <div class="oe_kanban_card"
+                             style="border-radius:12px; padding:12px;">
+
+                            <!-- Title -->
+                            <h3 style="margin:0; color:#2c3e50;">
+                                💊 <field name="name"/>
+                            </h3>
+
+                            <!-- Code -->
+                            <div style="font-size:12px; color:gray; margin-top:4px;">
+                                Code: <field name="reference"/>
+                            </div>
+
+                            <!-- Price -->
+                            <div style="margin-top:10px; font-size:14px;">
+                                💰 <strong><field name="price"/></strong> AED
+                            </div>
+
+                            <!-- Fun tag -->
+                            <div style="margin-top:12px;">
+                                <span style="
+                                    background:#dff9fb;
+                                    padding:4px 10px;
+                                    border-radius:12px;
+                                    font-size:12px;">
+                                    Pharmacy Item
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+
+            </kanban>
+
+        </field>
+    </record>
+
+</odoo>
